@@ -2,164 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>64 Bits: Computer Program, Code and Instructions</title>
+  <title>64 Bits : Computer Program, Code and Instructions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Understanding the relationship between computer programs, code, and instructions at the Intel x86 level." />
   <style>
-    :root {
-      --bg: #0f1216;
-      --panel: #171b22;
-      --text: #e6edf3;
-      --muted: #9aa4b2;
-      --accent: #59a6ff;
-      --code-bg: #0b0e12;
-      --border: #243044;
-    }
-    html, body {
-      height: 100%;
-      background: var(--bg);
-      color: var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      line-height: 1.6;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 1rem 4rem;
-    }
-    header {
-      margin-bottom: 1.5rem;
-    }
-    h1 {
-      font-size: 2rem;
-      margin: 0;
-      letter-spacing: 0.2px;
-    }
-    .subtitle {
-      margin-top: 0.5rem;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-    article {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem;
-    }
-    h2 {
-      font-size: 1.35rem;
-      margin: 1.25rem 0 0.5rem;
-      color: var(--accent);
-    }
-    p {
-      margin: 0.75rem 0;
-    }
-    .lead {
-      font-size: 1.05rem;
-      color: var(--muted);
-      border-left: 3px solid var(--border);
-      padding-left: 0.75rem;
-      margin: 1rem 0 1.25rem;
-    }
-    .codeblock {
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.75rem 0.9rem;
-      overflow-x: auto;
-      font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
-      font-size: 0.95rem;
-      color: #d6e2ff;
-      margin: 0.5rem 0 1rem;
-    }
-    footer {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-top: 1.5rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-    @media (min-width: 720px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    .card {
-      background: #141923;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem;
-    }
-    .label {
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 0.25rem;
-    }
-    .sep {
-      height: 1px;
-      background: var(--border);
-      margin: 1rem 0;
-      border: 0;
-    }
+    html, body { margin: 0; padding: 0; font-family: Georgia, "Times New Roman", Times, serif; line-height: 1.6; color: #111; }
+    .container { max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; }
+    h1 { font-size: 2rem; margin: 0 0 1rem; }
+    h2 { font-size: 1.4rem; margin: 1.5rem 0 0.75rem; }
+    p { margin: 0.75rem 0; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>64 Bits: Computer Program, Code and Instructions</h1>
-      <p class="subtitle">Peeling back the layers of how software becomes machine execution on Intel x86-64.</p>
-    </header>
+  <main class="container">
+    <h1>64 Bits : Computer Program, Code and Instructions</h1>
 
-    <article>
-      <p class="lead">
-        The words <em>computer program</em>, <em>code</em>, and <em>instruction</em> often sound interchangeable. They’re related,
-        but each plays a distinct role from human intent down to CPU execution. Understanding their hierarchy clarifies
-        programming and empowers reverse engineering on x86-64.
-      </p>
+    <p>When we first encounter the words <em>computer program</em>, <em>code</em>, and <em>instruction</em>, they often feel interchangeable. They all seem to describe the same thing: something written by a programmer and executed by a machine. But beneath the surface, each term carries its own weight and purpose. To truly understand how computers work — especially at the Intel x86 level — we need to peel back the layers and see how these words connect, overlap, and diverge.</p>
 
-      <h2>Computer program</h2>
-      <p>
-        A <strong>computer program</strong> is the complete entity a user runs. At the highest level, it’s written in a
-        human-readable language such as C, Python, or assembly, expressing logic, flow, and intent. At the lowest level,
-        that same program becomes a binary application containing machine instructions the CPU can execute directly.
-        It’s both the story and the script: the plot (logic), the characters (data), and the stage directions (flow).
-        Compilation or assembly transforms readable text into executable machine code, bridging human thought and machine action.
-      </p>
+    <h2><strong>computer program</strong></h2>
 
-      <h2>Code</h2>
-      <p>
-        <strong>Code</strong> is the actual text authored by the programmer—the recipe describing what the program should do.
-        It’s not raw binary yet; it’s a structured set of instructions expressed in a language. In assembly, code is
-        organized into segments like <code>.CODE</code> or <code>.DATA</code>, and within those segments, lines specify operations:
-        moving values, calling functions, or manipulating memory. Code is the bridge between human intent and machine execution—
-        readable to us, destined to be translated into machine instructions the CPU can act upon.
-      </p>
+    <p>A <strong>computer program</strong> is the broadest of the three. It is the complete entity, the finished product that a user runs on their machine. At its highest level, a program is written in a human-readable language — perhaps C, Python, or even assembly — where the programmer expresses logic, flow, and intent. At its lowest level, that same program becomes a binary application, a file filled with machine instructions that the CPU can understand directly. In other words, a program is both the story and the script: it contains the plot (logic), the characters (data), and the stage directions (flow). When compiled or assembled, it transforms from something humans can read into something the processor can execute, bridging the gap between human thought and machine action.</p>
 
-      <h2>Instruction</h2>
-      <p>
-        An <strong>instruction</strong> is the smallest executable unit—a single command carried out by the CPU. It might move
-        data between registers, add values, or jump to another address. In assembly, these appear as mnemonics like
-        <code>MOV AX, BX</code>, <code>ADD AL, 5</code>, or <code>INT 21h</code>. Beneath mnemonics lie binary opcodes (e.g., <code>B8 34 12</code>)
-        that the processor decodes and executes. Instructions are the bricks; code is the wall; the program is the house.
-      </p>
+    <p>Inside that program lies <strong>code</strong>. Code is the actual text written by the programmer, the recipe that describes what the program should do. It is not yet the raw binary that the CPU consumes, but rather the structured set of instructions expressed in a language. In assembly, code is organized into segments like <code>.CODE</code> or <code>.DATA</code>, and within those segments the programmer writes lines that describe operations. For example, a MASM snippet might load data into registers, call interrupts, or move values around. This code is the programmer’s way of telling the story step by step, laying out the logic in a way that can later be translated into machine instructions. Code is the bridge between human intent and machine execution — readable to us, but destined to be transformed into something the CPU can act upon.</p>
 
-      <hr class="sep" />
+    <p>Finally, we arrive at the <strong>instruction</strong>, the smallest and most fundamental unit of execution. An instruction is a single command that the CPU carries out at runtime. It might move data from one register to another, add two numbers, or jump to a different memory address. In assembly, these appear as mnemonics like <code>MOV AX, BX</code>, <code>ADD AL, 5</code>, or <code>INT 21h</code>. Underneath those mnemonics lies the true machine language: binary opcodes such as <code>B8 34 12</code> that the processor decodes and executes. Instructions are the bricks from which the house of code is built. Each one is simple, atomic, and precise, but when combined they form the complex structures we call programs. If code is the recipe, then instructions are the individual steps — chop the onions, heat the pan, stir the sauce — that together create the dish.</p>
 
-      <h2>Hierarchy and practice</h2>
-      <p>
-        A program is the complete application. That program is composed of code, the written logic and structure. That code
-        is made of instructions, the atomic operations the CPU performs. Debugging or reverse engineering peels back these
-        layers—from program, to code, to instructions—revealing how behavior emerges step by step.
-      </p>
-      <p>
-        For cybersecurity and digital forensics, distinguishing organizational code from executing instructions matters.
-        Malware may disguise intent at the code level, but its behavior is exposed by the instructions it runs. Separating
-        these concepts sharpens assembly learning and reverse engineering: seeing the recipe, reading the steps, and watching
-        execution on the “stove” of the CPU.
-      </p>
+    <p>The relationship between these three concepts is hierarchical and deeply interconnected. A <strong>program</strong> is the complete application, the finished product that users run. That program is composed of <strong>code</strong>, the written logic that programmers craft in a language. And that code itself is made up of <strong>instructions</strong>, the smallest executable units that the CPU understands. When you debug or reverse engineer an Intel x86 binary, you are peeling back the layers: from the program as a whole, to the code that structures it, down to the instructions that drive the processor one step at a time.</p>
+
+    <p>Understanding this hierarchy is more than academic. In cybersecurity and digital forensics, analysts must distinguish between the organizational elements of code and the actual instructions that execute. Malware may disguise itself in code, but its true behavior lies in the instructions it runs. By learning to separate these terms — program, code, and instruction — learners gain clarity not only in assembly programming but also in the art of reverse engineering. It is the difference between seeing the recipe, reading the steps, and watching the chef cook the meal.</p>
 
       <div class="grid">
         <div class="card">
