@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>64 Bits: Computer Program, Code and Instructions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Understanding the relationship between computer programs, code, and instructions at the Intel x86 level." />
+  <style>
+    :root {
+      --bg: #0f1216;
+      --panel: #171b22;
+      --text: #e6edf3;
+      --muted: #9aa4b2;
+      --accent: #59a6ff;
+      --code-bg: #0b0e12;
+      --border: #243044;
+    }
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+    header {
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin: 0;
+      letter-spacing: 0.2px;
+    }
+    .subtitle {
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    article {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    h2 {
+      font-size: 1.35rem;
+      margin: 1.25rem 0 0.5rem;
+      color: var(--accent);
+    }
+    p {
+      margin: 0.75rem 0;
+    }
+    .lead {
+      font-size: 1.05rem;
+      color: var(--muted);
+      border-left: 3px solid var(--border);
+      padding-left: 0.75rem;
+      margin: 1rem 0 1.25rem;
+    }
+    .codeblock {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      overflow-x: auto;
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.95rem;
+      color: #d6e2ff;
+      margin: 0.5rem 0 1rem;
+    }
+    footer {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 1.5rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .card {
+      background: #141923;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .label {
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+    .sep {
+      height: 1px;
+      background: var(--border);
+      margin: 1rem 0;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>64 Bits: Computer Program, Code and Instructions</h1>
+      <p class="subtitle">Peeling back the layers of how software becomes machine execution on Intel x86-64.</p>
+    </header>
+
+    <article>
+      <p class="lead">
+        The words <em>computer program</em>, <em>code</em>, and <em>instruction</em> often sound interchangeable. They’re related,
+        but each plays a distinct role from human intent down to CPU execution. Understanding their hierarchy clarifies
+        programming and empowers reverse engineering on x86-64.
+      </p>
+
+      <h2>Computer program</h2>
+      <p>
+        A <strong>computer program</strong> is the complete entity a user runs. At the highest level, it’s written in a
+        human-readable language such as C, Python, or assembly, expressing logic, flow, and intent. At the lowest level,
+        that same program becomes a binary application containing machine instructions the CPU can execute directly.
+        It’s both the story and the script: the plot (logic), the characters (data), and the stage directions (flow).
+        Compilation or assembly transforms readable text into executable machine code, bridging human thought and machine action.
+      </p>
+
+      <h2>Code</h2>
+      <p>
+        <strong>Code</strong> is the actual text authored by the programmer—the recipe describing what the program should do.
+        It’s not raw binary yet; it’s a structured set of instructions expressed in a language. In assembly, code is
+        organized into segments like <code>.CODE</code> or <code>.DATA</code>, and within those segments, lines specify operations:
+        moving values, calling functions, or manipulating memory. Code is the bridge between human intent and machine execution—
+        readable to us, destined to be translated into machine instructions the CPU can act upon.
+      </p>
+
+      <h2>Instruction</h2>
+      <p>
+        An <strong>instruction</strong> is the smallest executable unit—a single command carried out by the CPU. It might move
+        data between registers, add values, or jump to another address. In assembly, these appear as mnemonics like
+        <code>MOV AX, BX</code>, <code>ADD AL, 5</code>, or <code>INT 21h</code>. Beneath mnemonics lie binary opcodes (e.g., <code>B8 34 12</code>)
+        that the processor decodes and executes. Instructions are the bricks; code is the wall; the program is the house.
+      </p>
+
+      <hr class="sep" />
+
+      <h2>Hierarchy and practice</h2>
+      <p>
+        A program is the complete application. That program is composed of code, the written logic and structure. That code
+        is made of instructions, the atomic operations the CPU performs. Debugging or reverse engineering peels back these
+        layers—from program, to code, to instructions—revealing how behavior emerges step by step.
+      </p>
+      <p>
+        For cybersecurity and digital forensics, distinguishing organizational code from executing instructions matters.
+        Malware may disguise intent at the code level, but its behavior is exposed by the instructions it runs. Separating
+        these concepts sharpens assembly learning and reverse engineering: seeing the recipe, reading the steps, and watching
+        execution on the “stove” of the CPU.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="label">Program</div>
+          <p>The complete executable artifact: logic, data, and flow packaged for users.</p>
+        </div>
+        <div class="card">
+          <div class="label">Code</div>
+          <p>Human-authored text in a language (C, Python, assembly) that’s compiled/assembled into machine code.</p>
+        </div>
+        <div class="card">
+          <div class="label">Instruction</div>
+          <p>CPU-level operation (mnemonic → opcode) executed at runtime, e.g., MOV, ADD, JMP.</p>
+        </div>
+        <div class="card">
+          <div class="label">x86-64 context</div>
+          <p>Segments, registers, calling conventions, and opcodes define how code maps to concrete instructions.</p>
+        </div>
+      </div>
+
+      <h2>Examples</h2>
+      <div class="codeblock">
+        ; Assembly (MASM) snippet<br />
+        ; Code written by the programmer (mnemonics)<br />
+        ; Compiled/assembled into instructions (opcodes)<br /><br />
+        .CODE<br />
+        main PROC<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;mov rax, 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; instruction: move immediate to register<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;add rax, 5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; instruction: arithmetic add<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;ret&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; instruction: return from procedure<br />
+        main ENDP<br />
+        END
+      </div>
+
+      <footer>
+        © 2025 • Understanding program, code, and instruction helps you read intent, trace execution, and reason about behavior from source to silicon.
+      </footer>
+    </article>
+  </div>
+</body>
+</html>
